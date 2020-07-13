@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import * as actions from "../store/actions/index";
 
 import CountryCard from "../components/card";
+import FilterRow from "../components/filterRow";
 
 export default function HomePage(props) {
   const dispatch = useDispatch();
@@ -12,19 +13,20 @@ export default function HomePage(props) {
     dispatch(actions.fetchCountries());
   }, [dispatch]);
 
-  const countryClickedHandler = (alpha3code) => {
-    console.log("alpha3Code");
+  const countryClickedHandler = (alpha3Code) => {
+    console.log("alpha3Code", alpha3Code);
   };
 
   return (
     <>
+      <FilterRow />
       {countries.length > 0 && (
         <div className="countries-wrapper">
           {countries.map((c) => (
             <CountryCard
-              key={c.alpha3code}
+              key={c.alpha3Code}
               country={c}
-              clickHandler={() => countryClickedHandler(c.alpha3code)}
+              clickHandler={() => countryClickedHandler(c.alpha3Code)}
             />
           ))}
         </div>
